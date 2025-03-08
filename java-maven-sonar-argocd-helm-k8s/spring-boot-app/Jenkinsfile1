@@ -21,9 +21,11 @@ pipeline {
     }
     stage('SonarQube Analysis') {
       steps {
+        script{
         withSonarQubeEnv(credentialsId: 'sonarqube') {
           sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app'
             sh 'mvn clean package sonar:sonar'
+        }
         }
       }
     }    
